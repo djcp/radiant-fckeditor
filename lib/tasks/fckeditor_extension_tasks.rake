@@ -1,28 +1,29 @@
 namespace :radiant do
-  namespace :extensions do
-    namespace :fckeditor do
-      
-      desc "Runs the migration of the Fckeditor extension"
-      task :migrate => :environment do
-        require 'radiant/extension_migrator'
-        if ENV["VERSION"]
-          FckeditorExtension.migrator.migrate(ENV["VERSION"].to_i)
-        else
-          FckeditorExtension.migrator.migrate
-        end
-      end
-      
-      desc "Copies public assets of the Fckeditor to the instance public/ directory."
-      task :update => :environment do
-        is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
-        Dir[FckeditorExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
-          path = file.sub(FckeditorExtension.root, '')
-          directory = File.dirname(path)
-          puts "Copying #{path}..."
-          mkdir_p RAILS_ROOT + directory
-          cp file, RAILS_ROOT + path
-        end
-      end  
-    end
-  end
+	namespace :extensions do
+		namespace :fckeditor do
+
+			desc "Runs the migration of the Fckeditor extension"
+			task :migrate => :environment do
+				require 'radiant/extension_migrator'
+				if ENV["VERSION"]
+					FckeditorExtension.migrator.migrate(ENV["VERSION"].to_i)
+				else
+					FckeditorExtension.migrator.migrate
+				end
+			end
+
+			desc "Copies public assets of the Fckeditor to the instance public/ directory."
+			task :update => :environment do
+				require "config/environment"
+				require 'fileutils'
+				directory = FckeditorExtension.root
+				require "#{directory}/lib/fckeditor"
+				require "#{directory}/lib/fckeditor_version"
+				require "#{directory}/lib/fckeditor_file_utils"
+				puts "** Installing FCKEditor Plugin version #{FckeditorVersion.current}..."           
+				FckeditorFileUtils.destroy_and_install 
+				puts "** Successfully installed FCKEditor Plugin version #{FckeditorVersion.current}"
+			end
+		end  
+	end
 end
