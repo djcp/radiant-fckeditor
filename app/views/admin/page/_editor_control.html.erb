@@ -1,0 +1,10 @@
+<script type="text/javascript">
+	//<![CDATA[
+Event.observe(window,'load',function(){
+var oFCKeditor = new FCKeditor('part_<%= @index %>_content', '600px', '600px', 'Default');
+oFCKeditor.BasePath = "/javascripts/fckeditor/"
+oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';
+oFCKeditor.ReplaceTextarea();
+});
+//]]>
+</script>
