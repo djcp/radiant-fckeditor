@@ -1,14 +1,15 @@
 # Uncomment this if you reference any of your controllers in activate
-# require_dependency 'application'
+require_dependency 'application'
 
 class FckeditorExtension < Radiant::Extension
   version "1.0"
-  description "Describe your extension here"
-  url "http://yourwebsite.com/fckeditor"
+  description "Adds the FCKEditor editor - with file uploads and spell checking."
+  url "http://github.com/djcp/radiant-fckeditor/tree/master"
 
-  require 'fckeditor'
-  require 'fckeditor_version'
-  require 'fckeditor_file_utils'
+#  require 'fckeditor'
+#  require 'fckeditor_version'
+#  require 'fckeditor_file_utils'
+#  require 'fckeditor_filter'
 
   FckeditorFileUtils.check_and_install
 
@@ -17,10 +18,8 @@ class FckeditorExtension < Radiant::Extension
 
 #  Rails::Initializer.run(:set_load_path, config)
 
-  ActionView::Base.send(:include, Fckeditor::Helper)
+ # ActionView::Base.send(:include, Fckeditor::Helper)
 
-  # require the controller
-  require 'fckeditor_controller'
    define_routes do |map|
      map.connect 'fckeditor/:action', :controller => 'fckeditor'
 	 map.connect 'fckeditor/check_spelling', :controller => 'fckeditor', :action => 'check_spelling'
@@ -32,6 +31,7 @@ class FckeditorExtension < Radiant::Extension
     # admin.tabs.add "Fckeditor", "/admin/fckeditor", :after => "Layouts", :visibility => [:all]
 	admin.page.edit.add :part_controls, "editor_control"
 	Admin::PageController.send :include, FckeditorInterface
+	FckeditorFilter
   end
   
   def deactivate

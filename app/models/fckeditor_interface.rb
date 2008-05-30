@@ -8,10 +8,8 @@ module FckeditorInterface
   
   module FckeditorInstanceMethods
     def add_fckeditor_interface
- #     @buttons_partials ||= []
- #     @buttons_partials << "attachments_box"
       include_javascript 'fckeditor/fckeditor'
- #     include_stylesheet 'admin/page_attachments'
+      include_javascript 'fckeditor/observe'
     end
   end
 end

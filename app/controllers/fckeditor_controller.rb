@@ -1,7 +1,9 @@
 require 'fileutils'
 require 'tmpdir'
 
-class FckeditorController < ActionController::Base
+#class FckeditorController < ActionController::Base
+class FckeditorController < ApplicationController
+  protect_from_forgery :except => [:command,:check_spelling]
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
   MIME_TYPES = [
@@ -113,9 +115,10 @@ class FckeditorController < ActionController::Base
     self.upload_file
   end
   
-  include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::SanitizeHelper
   def check_spelling
     require 'cgi'
+	require 'fckeditor'
     require 'fckeditor_spell_check'
 
     @original_text = params[:textinputs] ? params[:textinputs].first : ''
@@ -140,7 +143,7 @@ class FckeditorController < ActionController::Base
   def check_file(file)
     # check that the file is a tempfile object
     # RAILS_DEFAULT_LOGGER.info "CLASS OF UPLOAD OBJECT: #{file.class}"
-    unless file.class.to_s == "Tempfile" || file.class.to_s == "StringIO" || file.class.to_s == 'ActionController::UploadedTempfile'
+    unless file.class.to_s.match(/tempfile|stringio|file/i)
       @errorNumber = 403
       throw Exception.new
     end

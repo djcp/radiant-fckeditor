@@ -1,3 +1,54 @@
 = Fckeditor
+This gives you the excellent FCKEditor (with file uploads and spell checking) in your Radiant page parts.
 
-Description goes here
+== Requirements
+This extension has been tested on Radiant version 0.6.7. It *should* work on lower versions that have the Shards extension installed, but I can't confirm this.
+
+You need to have aspell installed for spell checking to work.
+
+== Installation
+In $RADIANT_ROOT
+
+1. Get the extension:
+git clone git://github.com/djcp/radiant-fckeditor.git vendor/extensions/fckeditor
+
+2. Install the relevant resources into $RADIANT_ROOT/app/public/javascripts/fckeditor*
+rake radiant:extensions:fckeditor:update
+
+It will auto-install itself if you forget to.
+
+3. Restart your deployment server.
+
+== Uninstallation
+Remove:
+* vendor/extensions/fckeditor
+* public/javascripts/fckeditor/
+* public/javascripts/fckconfig.js
+* public/uploads/File|Flash|Image|Media
+
+== Notes
+* There are no changes to your Radiant database.
+* Uploaded files are saved in $RADIANT_ROOT/public/uploads
+* You can have FCKEditor handle only some page parts - it won't interfere with parts handled by another filter.
+* You can upload JPG, PNG, GIF and flash files.
+
+== Usage
+Set the filter on your page part to "Fckeditor" and the editor will be instantiated. You can also remove the editor by setting the filter back to something other than "Fckeditor" and it'll be removed.
+
+Use the "browse server" button on the Image, Flash, and File tools to invoke the file upload feature.
+
+== Gotchas
+* Radius tags get stomped on by FCKEditor. For now, you probably shouldn't try to use radius tags in page parts managed with FCKEditor.
+* If you don't have aspell installed, spell checking will never find errors. It'll always return "no errors found."
+
+== TODOS
+* Look into integrating this plugin with the PageAttachments plugin so that files live on pages and the same uploads are available in FCKEditor and Radius tags.
+
+== See Also
+Based upon Scott Rutherford's Rails 2.0 plugin:
+http://blog.caronsoftware.com/2008/2/6/fckeditor-plugin-0-4-3-released
+
+http://www.fckeditor.net/
+
+== Author
+* Dan Collis-Puro, dan@endpoint.com, End Point Corporation
