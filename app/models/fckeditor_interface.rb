@@ -1,8 +1,8 @@
 module FckeditorInterface
   def self.included(base)
     base.class_eval {
-      before_filter :add_fckeditor_interface, :only => [:edit, :new]
       include FckeditorInstanceMethods
+      before_filter :add_fckeditor_interface, :only => [:edit, :new]
     }
   end
   

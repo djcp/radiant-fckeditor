@@ -15,8 +15,6 @@ git clone git://github.com/djcp/radiant-fckeditor.git vendor/extensions/fckedito
 2. Install the relevant resources into $RADIANT_ROOT/app/public/javascripts/fckeditor*
 rake radiant:extensions:fckeditor:update
 
-It will auto-install itself if you forget to.
-
 3. Restart your deployment server.
 
 == Uninstallation
