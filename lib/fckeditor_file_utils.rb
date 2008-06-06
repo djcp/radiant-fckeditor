@@ -37,13 +37,6 @@ module FckeditorFileUtils
     FileUtils.mv source, dest
   end
   
-  def FckeditorFileUtils.copy_configuration
-    # need to copy over the code if it doesn't already exist
-    config_file = File.join(RAILS_ROOT, '/vendor/extensions/fckeditor/public/javascripts/fckcustom.js')
-    dest = File.join(RAILS_ROOT, '/public/javascripts/fckcustom.js')
-    FileUtils.cp(config_file, dest) unless File.exist?(dest)
-  end
-  
   def FckeditorFileUtils.create_uploads_directory
     uploads = File.join(RAILS_ROOT, '/public/uploads')
     FileUtils.mkdir(uploads) unless File.exist?(uploads)    
@@ -66,8 +59,6 @@ module FckeditorFileUtils
     end    
     # now install fresh
     install(true)       
-    # copy over the config file (unless it exists)
-    copy_configuration 
   end
   
   def FckeditorFileUtils.check_and_install
@@ -75,7 +66,5 @@ module FckeditorFileUtils
     unless File.exist?(FCKEDITOR_INSTALL_DIRECTORY)
       install(false)
     end    
-    # copy over the config file (unless it exists)
-    copy_configuration
   end
 end
