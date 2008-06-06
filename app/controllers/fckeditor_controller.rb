@@ -3,7 +3,7 @@ require 'tmpdir'
 
 class FckeditorController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
-  protect_from_forgery :except => [:command,:check_spelling]
+  protect_from_forgery :except => [:command,:check_spelling,:config]
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
   MIME_TYPES = [
@@ -33,7 +33,19 @@ class FckeditorController < ApplicationController
     xml.Error("number" => @errorNumber) if !@errorNumber.nil?
   end
   EOL
-  
+ 
+  def config
+	  tag_list = []
+	  class_name = params[:class_name]
+	  class_name.constantize.tag_descriptions.sort.each do |tag_name, description|
+		  tag_list << tag_name
+	  end
+	  @fck_tag_list = tag_list.collect{|tag| 'R:' + tag.upcase}.join('|') 
+	  respond_to do |format|
+		  format.js 
+	  end
+  end
+
   # figure out who needs to handle this request
   def command   
     if params[:Command] == 'GetFoldersAndFiles' || params[:Command] == 'GetFolders'
@@ -43,7 +55,6 @@ class FckeditorController < ApplicationController
 	  elsif params[:Command] == 'FileUpload'
  	    upload_file
  	  end
- 	  
  	  render :inline => RXML, :type => :rxml unless params[:Command] == 'FileUpload'
  	end 
  	

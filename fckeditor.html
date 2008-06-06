@@ -1,1 +1,12 @@
-This is a dummy file.
+<h2>Notes:</h2>
+
+<ul>
+	<li>File uploads work! Try the image tool and then the "browse server" button. Files are saved to $RADIANT_ROOT/public/uploads/</li>
+	<li>The editor mostly ignores Radius tags. See "quirks" for details.</li>
+	<li>Put in Radius tags in "source" view, if you must mix them into your HTML. My suggestion is to expose specific areas of your pages to HTML editing with the FCKEditor filter, and keep your radius-rich areas in different text-only filter types.</li>
+</ul>
+
+<h2>Quirks</h2>
+<ul>
+	<li>Singleton tags will be turned into container tags on save. This means <code>&lt;r:link /&gt;</code> will be turned into <code>&lt;r:link&gt;&lt;/r:link&gt;</code>.</li>
+</ul>

@@ -1,6 +1,4 @@
-<script type="text/javascript">
-	//<![CDATA[
-Event.observe(window,'load',function(){instantiateFCKEditor(<%= @index %>)});
-Event.observe($('part_<%= @index %>_filter_id'),'change',function(){toggleEditor(<%= @index %>)});
-//]]>
-</script>
+<%=
+	javascript_tag("Event.observe(window,'load',function(){instantiateFCKEditor(#{@index})});
+Event.observe($('part_#{@index}_filter_id'),'change',function(){toggleEditor(#{@index})});")
+%>

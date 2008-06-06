@@ -19,7 +19,7 @@ function removeEditor(partIndex){
 	editorInstance.UpdateLinkedField();
 	var editorContainer = $('part_' + partIndex + '_content___Frame');
 	if(editorContainer){
-		editorContainer.style.display = 'none';
+		editorContainer.parentNode.removeChild( editorContainer );
 	}
 	var textareaContainer = $('part_' + partIndex + '_content');
 	textareaContainer.style.display = '';
@@ -27,7 +27,10 @@ function removeEditor(partIndex){
 
 function putInEditor(partIndex){
 	var oFCKeditor = new FCKeditor('part_'+ partIndex +'_content', '600px', '600px', 'Default');
+	var page_type = $F('page_class_name');
 	oFCKeditor.BasePath = "/javascripts/fckeditor/"
-		oFCKeditor.Config['CustomConfigurationsPath'] = '../../fckcustom.js';
+	oFCKeditor.Config['CustomConfigurationsPath'] = '/fckeditor/config?class_name=' + page_type;
+	oFCKeditor.Width = '100%' ;
+	oFCKeditor.Height = '350' ;
 	oFCKeditor.ReplaceTextarea();
 }
