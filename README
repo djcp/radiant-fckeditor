@@ -36,7 +36,8 @@ Set the filter on your page part to "Fckeditor" and the editor will be instantia
 Use the "browse server" button on the Image, Flash, and File tools to invoke the file upload feature.
 
 == Gotchas
-* Radius tags get stomped on by FCKEditor. For now, you probably shouldn't try to use radius tags in page parts managed with FCKEditor.
+* Be sure to allow pop-ups from your Radiant site. The FCKEditor uses popups extensively.
+* Radius tags may get mangled by FCKEditor. We've done our best to ensure FCKEditor ignores them, but there will still be quirks. See the Filter Reference on the /admin/pages/edit/ page for details.
 * If you don't have aspell installed, spell checking will never find errors. It'll always return "no errors found."
 
 == TODOS
