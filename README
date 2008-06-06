@@ -39,9 +39,14 @@ Use the "browse server" button on the Image, Flash, and File tools to invoke the
 * Be sure to allow pop-ups from your Radiant site. The FCKEditor uses popups extensively.
 * Radius tags may get mangled by FCKEditor. We've done our best to ensure FCKEditor ignores them, but there will still be quirks. See the Filter Reference on the /admin/pages/edit/ page for details.
 * If you don't have aspell installed, spell checking will never find errors. It'll always return "no errors found."
+* If you see multiple FCKEditors on your page parts, you're probably running Radiant 0.6.7 in development mode. Either:
+** Downgrade to 0.6.6 with shards,
+** Run in production mode, or
+** Upgrade to the latest Radiant from github.
 
 == TODOS
 * Look into integrating this plugin with the PageAttachments plugin so that files live on pages and the same uploads are available in FCKEditor and Radius tags.
+* Create an admin tab to allow for the specification of allowed MIME-types and toolbar buttons.
 
 == See Also
 Based upon Scott Rutherford's Rails 2.0 plugin:
