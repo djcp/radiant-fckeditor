@@ -2,7 +2,7 @@
 require_dependency 'application'
 
 class FckeditorExtension < Radiant::Extension
-  version "0.4"
+  version "0.5"
   description "Adds the FCKEditor editor - with file uploads and spell checking."
   url "http://github.com/djcp/radiant-fckeditor/tree/master"
  # ActionView::Base.send(:include, Fckeditor::Helper)
