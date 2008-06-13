@@ -6,9 +6,20 @@ FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/bro
 FCKConfig.ImageBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Image&Connector=' + FCKRelativePath + '/fckeditor/command';
 FCKConfig.FlashBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Type=Flash&Connector=' + FCKRelativePath + '/fckeditor/command';
 
-FCKConfig.LinkUploadURL = FCKRelativePath + '/fckeditor/upload';
-FCKConfig.ImageUploadURL = FCKRelativePath + '/fckeditor/upload?Type=Image';
-FCKConfig.FlashUploadURL = FCKRelativePath + '/fckeditor/upload?Type=Flash';
+// FCKConfig.LinkBrowser = false;
+FCKConfig.LinkUpload = false;
+FCKConfig.ImageUpload = false;
+FCKConfig.FlashUpload = false;
+
+// FCKConfig.LinkUploadURL = FCKRelativePath + '/fckeditor/upload';
+// FCKConfig.ImageUploadURL = FCKRelativePath + '/fckeditor/command?Command=FileUpload&Type=Image&CurrentFolder=/';
+// FCKConfig.FlashUploadURL = FCKRelativePath + '/fckeditor/upload?Type=Flash';
+
+FCKConfig.ImageUploadAllowedExtensions = "\.(jpg|gif|jpeg|png)$" ;
+FCKConfig.LinkUploadAllowedExtensions = "\.(asf|avi|doc|flv|gif|htm|html|xhtml|jpeg|jpg|mov|mp3|mp4|mpeg|mpg|ods|odg|odt|odb|pdf|png|ppt|qt|sxw|sxc|sxi|swf|tar|tgz|tif|tiff|txt|text|wav|wma|wmv|xls|xml|zip)$" ;
+
+FCKConfig.FlashUploadAllowedExtensions = "\.(swf|flv)$" ;
+
 FCKConfig.SpellerPagesServerScript = FCKRelativePath + '/fckeditor/check_spelling';
 FCKConfig.AllowQueryStringDebug = false;
 FCKConfig.SpellChecker = 'SpellerPages';
@@ -16,7 +27,6 @@ FCKConfig.SpellChecker = 'SpellerPages';
 FCKConfig.ProtectedSource.Add(/<\/?r:*?>/gi);
 FCKConfig.ProtectedTags = '<%= @fck_tag_list %>' ;
 
-// ONLY CHANGE BELOW HERE
 //FCKConfig.SkinPath = FCKConfig.BasePath + 'skins/silver/';
 
 FCKConfig.ToolbarSets["Simple"] = [
@@ -33,4 +43,6 @@ FCKConfig.ToolbarSets["Simple"] = [
 	['FontName','FontSize'],
 	['TextColor','BGColor'],
 	['-','About']
-] ;
+];
+
+
