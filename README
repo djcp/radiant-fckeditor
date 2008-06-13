@@ -28,12 +28,12 @@ Remove:
 * There are no changes to your Radiant database.
 * Uploaded files are saved in $RADIANT_ROOT/public/uploads
 * You can have FCKEditor handle only some page parts - it won't interfere with parts handled by another filter.
-* You can upload JPG, PNG, GIF and flash files.
+* You can upload JPG, PNG, GIF and flash files, along with many common video, audio, and office document formats, including text and HTML.
 
 == Usage
-Set the filter on your page part to "Fckeditor" and the editor will be instantiated. You can also remove the editor by setting the filter back to something other than "Fckeditor" and it'll be removed.
+Set the filter on your page part to "Fckeditor" and the editor will be instantiated. You can remove the editor from a page part by setting the filter back to something other than "Fckeditor."
 
-Use the "browse server" button on the Image, Flash, and File tools to invoke the file upload feature.
+Use the "browse server" button on the Image, Flash, and Link tools to invoke the file upload feature.
 
 == Gotchas
 * Be sure to allow pop-ups from your Radiant site. The FCKEditor uses popups extensively.
@@ -46,7 +46,7 @@ Use the "browse server" button on the Image, Flash, and File tools to invoke the
 
 == TODOS
 * Look into integrating this plugin with the PageAttachments plugin so that files live on pages and the same uploads are available in FCKEditor and Radius tags.
-* Create an admin tab to allow for the specification of allowed MIME-types and toolbar buttons.
+* Create an admin tab to allow for the specification of allowed MIME-types and customization of toolbar buttons.
 
 == See Also
 Based upon Scott Rutherford's Rails 2.0 plugin:
