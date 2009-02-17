@@ -2,7 +2,7 @@
 This gives you the excellent FCKEditor (with file uploads and spell checking) in your Radiant page parts.
 
 == Requirements
-This extension has been tested on Radiant version 0.6.7. It *should* work on lower versions that have the Shards extension installed, but I can't confirm this.
+This extension has been tested on Radiant version 0.7.1. It will not work on versions < 0.7.0 because the Radiant admin interface has changed.
 
 You need to have aspell installed for spell checking to work.
 
