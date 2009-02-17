@@ -50,24 +50,24 @@ class FckeditorController < ApplicationController
   xml.instruct!
     #=> <?xml version="1.0" encoding="utf-8" ?>
   xml.Connector("command" => params[:Command], "resourceType" => 'File') do
-    xml.CurrentFolder("url" => @url, "path" => params[:CurrentFolder])
+    xml.CurrentFolder("url" => url, "path" => params[:CurrentFolder])
     xml.Folders do
-      @folders.each do |folder|
+      folders.each do |folder|
         xml.Folder("name" => folder)
       end
-    end if !@folders.nil?
+    end if !folders.nil?
     xml.Files do
-      @files.keys.sort.each do |f|
-        xml.File("name" => f, "size" => @files[f])
+      files.keys.sort.each do |f|
+        xml.File("name" => f, "size" => files[f])
       end
-    end if !@files.nil?
-    xml.Error("number" => @errorNumber) if !@errorNumber.nil?
+    end if !files.nil?
+    xml.Error("number" => errorNumber) if !errorNumber.nil?
   end
   EOL
  
   def config
 	  tag_list = []
-	  class_name = params[:class_name]
+	  class_name = (params[:class_name].blank? ? 'Page' : params[:class_name])
 	  class_name.constantize.tag_descriptions.sort.each do |tag_name, description|
 		  tag_list << tag_name
 	  end
@@ -79,27 +79,35 @@ class FckeditorController < ApplicationController
 
   # figure out who needs to handle this request
   def command   
+    @current_folder = current_directory_path
+    @url = upload_directory_path
     if params[:Command] == 'GetFoldersAndFiles' || params[:Command] == 'GetFolders'
       get_folders_and_files
     elsif params[:Command] == 'CreateFolder'
       create_folder
-	  elsif params[:Command] == 'FileUpload'
- 	    upload_file
- 	  end
- 	  render :inline => RXML, :type => :rxml unless params[:Command] == 'FileUpload'
- 	end 
+    elsif params[:Command] == 'FileUpload'
+      upload_file
+    end
+    unless params[:Command] == 'FileUpload'
+      render :inline => RXML , :type => :rxml , :locals => {:url => @url, :folders => @folders, :files => @files, :errorNumber => @errorNumber}
+    end
+  end 
  	
   def get_folders_and_files(include_files = true)
     @folders = Array.new
     @files = {}
     begin
-      @url = upload_directory_path
-      @current_folder = current_directory_path
       Dir.entries(@current_folder).each do |entry|
-        next if entry =~ /^\./
+        if entry =~ /^\./
+          next
+        end
         path = @current_folder + entry
-        @folders.push entry if FileTest.directory?(path)
-        @files[entry] = (File.size(path) / 1024) if (include_files and FileTest.file?(path))
+        if FileTest.directory?(path)
+          @folders.push entry 
+        end
+        if include_files and FileTest.file?(path)
+          @files[entry] = (File.size(path) / 1024) 
+        end
       end
     rescue => e
       @errorNumber = 110 if @errorNumber.nil?
