@@ -2,7 +2,7 @@
 This gives you the excellent FCKEditor (with file uploads and spell checking) in your Radiant page parts.
 
 == Requirements
-This extension has been tested on Radiant version 0.7.1. It will not work on versions < 0.7.0 because the Radiant admin interface has changed.
+This extension has been tested on Radiant version 0.7.1. It will not work on versions < 0.7.0 because the Radiant admin interface has changed.  If you need a version of this extension that works for Radiant < 0.7.0, please see the "radiant-0.6.9" tag on github.
 
 You need to have aspell installed for spell checking to work.
 
@@ -39,10 +39,6 @@ Use the "browse server" button on the Image, Flash, and Link tools to invoke the
 * Be sure to allow pop-ups from your Radiant site. The FCKEditor uses popups extensively.
 * Radius tags may get mangled by FCKEditor. We've done our best to ensure FCKEditor ignores them, but there will still be quirks. See the Filter Reference on the /admin/pages/edit/ page for details.
 * If you don't have aspell installed, spell checking will never find errors. It'll always return "no errors found."
-* If you see multiple FCKEditors on your page parts, you're probably running Radiant 0.6.7 in development mode. Either:
-** Downgrade to 0.6.6 with shards,
-** Run in production mode, or
-** Upgrade to the latest Radiant from github.
 
 == TODOS
 * Look into integrating this plugin with the PageAttachments plugin so that files live on pages and the same uploads are available in FCKEditor and Radius tags.
