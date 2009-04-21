@@ -8,9 +8,9 @@ function instantiateFCKEditor(partIndex){
 function toggleEditor(partIndex){
 	var filterId = $('part_' + partIndex + '_filter_id');
 	if(filterId.value == 'Fckeditor'){
-		putInEditor('part_' + partIndex + '_content');
+		putInEditor(partIndex);
 	} else {
-		removeEditor('part_' + partIndex + '_content');
+		removeEditor(partIndex);
 	}
 }
 
