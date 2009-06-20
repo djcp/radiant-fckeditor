@@ -2,7 +2,9 @@
 This gives you the excellent FCKEditor (with file uploads and spell checking) in your Radiant page parts.
 
 == Requirements
-This extension has been tested on Radiant version 0.7.1. It will not work on versions < 0.7.0 because the Radiant admin interface has changed.  If you need a version of this extension that works for Radiant < 0.7.0, please see the "radiant-0.6.9" tag on github.
+This extension has been tested on Radiant version 0.8.0. It will not work on versions < 0.8.0.
+
+If you need a version of this extension that works for Radiant < 0.8.0, please see the "radiant-0.7.1" (or other) tag on github.
 
 You need to have aspell installed for spell checking to work.
 
@@ -56,3 +58,6 @@ http://www.fckeditor.net/
 
 == Contributors
 * Jereme Claussen, www.jeremeclaussen.com, for debugging help.
+* http://github.com/dko for the assistance getting this to work under Radiant 0.8.0.
+
+

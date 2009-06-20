@@ -2,7 +2,7 @@ require 'fileutils'
 require 'tmpdir'
 
 class FckeditorController < ApplicationController
-  include ActionView::Helpers::SanitizeHelper
+
   protect_from_forgery :except => [:command,:check_spelling,:config]
   UPLOADED = "/uploads"
   UPLOADED_ROOT = RAILS_ROOT + "/public" + UPLOADED
@@ -168,7 +168,7 @@ class FckeditorController < ApplicationController
   def check_spelling
     require 'cgi'
     @original_text = params[:textinputs] ? params[:textinputs].first : ''
-    plain_text = strip_tags(CGI.unescape(@original_text))
+    plain_text = ActionController::Base.helpers.strip_tags(CGI.unescape(@original_text))
     @words = FckeditorSpellCheck.check_spelling(plain_text)
     render :file => "#{FckeditorExtension.root}/app/views/fckeditor/spell_check.rhtml"
   end
@@ -181,7 +181,7 @@ class FckeditorController < ApplicationController
   end
   
   def upload_directory_path
-    uploaded = request.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
+    uploaded = ActionController::Base.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
   end
   
