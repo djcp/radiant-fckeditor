@@ -20,10 +20,10 @@ namespace :radiant do
 				require "#{directory}/lib/fckeditor"
 				require "#{directory}/lib/fckeditor_version"
 				require "#{directory}/lib/fckeditor_file_utils"
-				puts "** Installing Radiant FCKEditor Extension version #{FckeditorExtension.version}..."           
-				FckeditorFileUtils.destroy_and_install 
+				puts "** Installing Radiant FCKEditor Extension version #{FckeditorExtension.version}..."
+				FckeditorFileUtils.destroy_and_install
 				puts "** Successfully installed Radiant FCKEditor Extension version #{FckeditorExtension.version}"
 			end
-		end  
+		end
 	end
 end

@@ -45,7 +45,7 @@ class FckeditorController < ApplicationController
 	"application/xml",
 	"application/xhtml+xml"
   ]
-  
+
   RXML = <<-EOL
   xml.instruct!
     #=> <?xml version="1.0" encoding="utf-8" ?>
@@ -64,21 +64,21 @@ class FckeditorController < ApplicationController
     xml.Error("number" => errorNumber) if !errorNumber.nil?
   end
   EOL
- 
+
   def config
 	  tag_list = []
 	  class_name = (params[:class_name].blank? ? 'Page' : params[:class_name])
 	  class_name.constantize.tag_descriptions.sort.each do |tag_name, description|
 		  tag_list << tag_name
 	  end
-	  @fck_tag_list = tag_list.collect{|tag| 'R:' + tag.upcase}.join('|') 
+	  @fck_tag_list = tag_list.collect{|tag| 'R:' + tag.upcase}.join('|')
 	  respond_to do |format|
-		  format.js 
+		  format.js
 	  end
   end
 
   # figure out who needs to handle this request
-  def command   
+  def command
     @current_folder = current_directory_path
     @url = upload_directory_path
     if params[:Command] == 'GetFoldersAndFiles' || params[:Command] == 'GetFolders'
@@ -91,8 +91,8 @@ class FckeditorController < ApplicationController
     unless params[:Command] == 'FileUpload'
       render :inline => RXML , :type => :rxml , :locals => {:url => @url, :folders => @folders, :files => @files, :errorNumber => @errorNumber}
     end
-  end 
- 	
+  end
+
   def get_folders_and_files(include_files = true)
     @folders = Array.new
     @files = {}
@@ -103,10 +103,10 @@ class FckeditorController < ApplicationController
         end
         path = @current_folder + entry
         if FileTest.directory?(path)
-          @folders.push entry 
+          @folders.push entry
         end
         if include_files and FileTest.file?(path)
-          @files[entry] = (File.size(path) / 1024) 
+          @files[entry] = (File.size(path) / 1024)
         end
       end
     rescue => e
@@ -115,7 +115,7 @@ class FckeditorController < ApplicationController
   end
 
   def create_folder
-    begin 
+    begin
       @url = current_directory_path
       path = @url + params[:NewFolderName]
       if !(File.stat(@url).writable?)
@@ -132,7 +132,7 @@ class FckeditorController < ApplicationController
       @errorNumber = 110 if @errorNumber.nil?
     end
   end
-  
+
   def upload_file
     begin
       @new_file = check_file(params[:NewFile])
@@ -164,7 +164,7 @@ class FckeditorController < ApplicationController
   def upload
     self.upload_file
   end
-  
+
   def check_spelling
     require 'cgi'
     @original_text = params[:textinputs] ? params[:textinputs].first : ''
@@ -172,19 +172,19 @@ class FckeditorController < ApplicationController
     @words = FckeditorSpellCheck.check_spelling(plain_text)
     render :file => "#{FckeditorExtension.root}/app/views/fckeditor/spell_check.rhtml"
   end
-  
+
   private
   def current_directory_path
     base_dir = "#{UPLOADED_ROOT}/#{params[:Type]}"
     Dir.mkdir(base_dir,0775) unless File.exists?(base_dir)
     check_path("#{base_dir}#{params[:CurrentFolder]}")
   end
-  
+
   def upload_directory_path
     uploaded = ActionController::Base.relative_url_root.to_s+"#{UPLOADED}/#{params[:Type]}"
     "#{uploaded}#{params[:CurrentFolder]}"
   end
-  
+
   def check_file(file)
     # check that the file is a tempfile object
     # RAILS_DEFAULT_LOGGER.info "CLASS OF UPLOAD OBJECT: #{file.class}"
@@ -194,7 +194,7 @@ class FckeditorController < ApplicationController
     end
     file
   end
-  
+
   def check_path(path)
     exp_path = File.expand_path path
     if exp_path !~ %r[^#{File.expand_path(RAILS_ROOT)}/public#{UPLOADED}]
