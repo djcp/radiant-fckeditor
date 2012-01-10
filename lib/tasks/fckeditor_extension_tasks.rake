@@ -14,7 +14,8 @@ namespace :radiant do
 
 			desc "Copies public assets of the Fckeditor to the instance public/ directory."
 			task :update => :environment do
-				require "config/environment"
+				# Update to work with v1.0.0-rc3 and greater
+				#require "config/environment"
 				require 'fileutils'
 				directory = FckeditorExtension.root
 				require "#{directory}/lib/fckeditor"
