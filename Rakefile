@@ -48,7 +48,7 @@ namespace :spec do
     t.rcov = true
     t.rcov_opts = ['--exclude', 'spec', '--rails']
   end
-  
+
   desc "Print Specdoc for all specs"
   Spec::Rake::SpecTask.new(:doc) do |t|
     t.spec_opts = ["--format", "specdoc", "--dry-run"]
@@ -62,7 +62,7 @@ namespace :spec do
       t.spec_files = FileList["spec/#{sub}/**/*_spec.rb"]
     end
   end
-  
+
   # Hopefully no one has written their extensions in pre-0.9 style
   # desc "Translate specs from pre-0.9 to 0.9 style"
   # task :translate do

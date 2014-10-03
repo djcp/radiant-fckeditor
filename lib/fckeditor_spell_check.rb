@@ -8,10 +8,10 @@ class FckeditorSpellCheck
   def self.check_spelling(text)
     if RUBY_PLATFORM =~ /mswin/i
       aspell_program = 'c:\program files\aspell\bin\aspell' # windows
-    else 
+    else
       aspell_program = 'aspell' # every other OS on the planet
     end
-    
+
     # call aspell
     command = "\"#{aspell_program}\" -a --lang=#{language} --encoding=utf-8 -H 2>&1"
     RAILS_DEFAULT_LOGGER.info("Running spell check: #{command}")
